@@ -6,6 +6,3 @@
 [Template Matching](tm.py)
 
 [детектор Виолы-Джонса](vj.py)
-
-
-[Датасет](s3)
