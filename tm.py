@@ -4,9 +4,9 @@ import cv2
 from matplotlib import pyplot as plt
 
 
-def template_matching(temp, ex):
+def template_matching(temp, source_folder):
 	methods = ['cv2.TM_CCOEFF_NORMED']
-	image = cv2.imread(ex, 0)
+	image = cv2.imread(source_folder, 0)
 	template = cv2.imread(temp, 0)
 	w, h = template.shape[::-1]
 
@@ -18,7 +18,7 @@ def template_matching(temp, ex):
 		min_val, max_val, min_loc, top_left = cv2.minMaxLoc(res)
 		bottom_right = (top_left[0] + w, top_left[1] + h)
 
-		cv2.rectangle(img, top_left, bottom_right, 0, 5)
+		cv2.rectangle(img, top_left, bottom_right, 0, 1)
 
 		plt.subplot(121)
 		plt.imshow(res, cmap='gray')
@@ -33,10 +33,10 @@ def template_matching(temp, ex):
 		plt.show()
 
 
-def process_entity(ex_count, temp_count, ex_folder, temp_folder, file):
+def process_entity(source_count, temp_count, source_folder, temp_folder, file):
     images = [
-        os.path.join(ex_folder, '{}.{}'.format(i, file))
-        for i in range(1, ex_count + 1)
+        os.path.join(source_folder, '{}.png'.format(i, file))
+        for i in range(1, source_count + 1)
     ]
 
     templates = [
@@ -51,14 +51,14 @@ def process_entity(ex_count, temp_count, ex_folder, temp_folder, file):
 
 
 if __name__ == '__main__':
-	temp_count = 3
-	ex_count = 8
+	temp_count = 4
+	source_count = 4
 	dataset = 1
 
 	process_entity(
-		ex_count=ex_count,
+		source_count=source_count,
 		temp_count=temp_count,
-		ex_folder='data/ex{}'.format(dataset),
-		temp_folder='data/temp{}'.format(dataset),
+		source_folder='data/source'.format(dataset),
+		temp_folder='data/temp'.format(dataset),
 		file='jpg',
 	)
