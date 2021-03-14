@@ -12,7 +12,7 @@ def viola_jones(image_path):
 		cv2.data.haarcascades + 'haarcascade_eye.xml',
 	)
 
-	line_width = 3
+	line_width = 1
 	face_color = (0, 0, 255)
 	eyes_color = (0, 255, 0)
 	scale_factor = 1.1
@@ -35,29 +35,29 @@ def viola_jones(image_path):
 
 		eyes = eye_cascade.detectMultiScale(roi_gray)
 
-		for ex, ey, ew, eh in eyes:
+		for source, ey, ew, eh in eyes:
 			cv2.rectangle(
 				roi_color,
-				(ex, ey),
-				(ex + ew, ey + eh),
+				(source, ey),
+				(source + ew, ey + eh),
 				eyes_color,
 				line_width,
 			)
 
 	plt.imshow(img)
-	cv2.waitKey(0)
+	# cv2.waitKey(0)
 	cv2.destroyAllWindows()
 	plt.show()
 
 
 if __name__ == '__main__':
-	ex_count = 8
+	source_count = 4
 	dataset = 1
-	file = 'jpg'
+	file = 'png'
 
 	images = [
-		os.path.join('data/ex{}'.format(dataset), '{}.{}'.format(i, file))
-		for i in range(1, ex_count + 1)
+		os.path.join('data/source'.format(dataset), '{}.{}'.format(i, file))
+		for i in range(1, source_count + 1)
 	]
 
 	for image in images:
